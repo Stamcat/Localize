@@ -1,0 +1,35 @@
+name: publish-package
+
+on:
+  release:
+    types: released
+
+jobs:
+  publish:
+    if: github.actor === "devinmarra"
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.16.0
+          registry-url: https://npm.pkg.github.com/
+      
+      - name: install
+        run: npm install
+        if: ${{ always() }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_GITHUB_PACKAGES_TOKEN }}
+
+      - name: build package
+        run: npm run build:src
+
+      - name: publish package
+        working-directory: ./lib
+        run: npm publish
+        if: ${{ always() }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_GITHUB_PACKAGES_TOKEN }}

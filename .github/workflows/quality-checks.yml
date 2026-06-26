@@ -1,0 +1,47 @@
+name: quality checks
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+    # types: [opened, reopened]
+
+jobs:
+  quality-checks:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - run: echo "Running code quality checks (disabled)"
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 24.15.0
+          registry-url: https://npm.pkg.github.com/
+      
+      - name: install
+        run: npm ci
+        if: ${{ always() }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_GITHUB_PACKAGES_TOKEN }}
+
+      - name: run type-check
+        run: npm run type-check
+
+      - name: run lint
+        run: npm run lint
+
+      # - name: run lint
+      #   run: npm run lint:package
+
+      - name: build package
+        run: npm run build:src
+
+    #   - name: check for circular dependencies
+    #     run: npm run check:dependencies:circular
+
+      # - name: generate sonarqube lint report
+      #   run: npm run lint:sonar
+
+      # - name: run unit tests
+      #   run: npm run test:sonar

@@ -1,0 +1,10 @@
+{
+  "en-GB": {
+    "report-header": {
+      "report-title": "hello new localized content"
+    },
+    "message": {
+      "success-confirmation": "Your message has been sent to {val} recipients"
+    }
+  }
+}

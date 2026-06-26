@@ -1,0 +1,10 @@
+{
+  "es-US": {
+    "report-header": {
+      "report-title": "hola nuevo contenido localizado"
+    },
+    "message": {
+      "success-confirmation": "Tu mensaje ha sido enviado a {val} destinatarios"
+    }
+  }
+}

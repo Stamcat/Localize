@@ -1,0 +1,10 @@
+{
+  "de-DE": {
+    "report-header": {
+      "report-title": "Hallo, neuer lokalisierter Inhalt"
+    },
+    "message": {
+      "success-confirmation": "Deine Nachricht wurde an {val} Empfänger gesendet"
+    }
+  }
+}

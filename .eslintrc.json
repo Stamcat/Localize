@@ -1,0 +1,62 @@
+{
+    "root": true,
+    "plugins": ["@typescript-eslint", "jsx-a11y", "sonarjs"],
+    "parser": "@typescript-eslint/parser",
+    "extends": [
+      "plugin:sonarjs/recommended",
+      "plugin:prettier/recommended",
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:storybook/recommended",
+      "plugin:eslint-comments/recommended"
+    ],
+    "rules": {
+      "no-console": "warn",
+      "@typescript-eslint/no-empty-function": "warn",
+      "max-params": ["error", 7],
+      "curly": ["error"],
+      "no-duplicate-imports": ["error"],
+      "consistent-return": ["error"],
+      "eslint-comments/require-description": ["error", { "ignore": [] }],
+      "complexity": ["error", 15],
+      "max-lines": ["error", 1000],
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          "argsIgnorePattern": "^_"
+        }
+      ],
+      "@typescript-eslint/explicit-module-boundary-types": "off",
+      "eslint-comments/no-unused-disable": "off",
+      "prettier/prettier": [
+        "error",
+        {
+          "endOfLine": "auto"
+        }
+      ],
+      "no-shadow": "off",
+      "@typescript-eslint/no-shadow": ["error"]
+    },
+    "overrides": [
+      {
+        "files": ["setupTests.ts", "qualityChecks/*.*"],
+        "rules": {
+          "@typescript-eslint/no-explicit-any": "off"
+        }
+      },
+      {
+        "files": ["scripts/*.*"],
+        "rules": {
+          "no-console": "off"
+        }
+      },
+      {
+        "files": ["*"],
+        "rules": {
+          "@typescript-eslint/no-var-requires": "off"
+        }
+      }
+    ]
+  }
+  

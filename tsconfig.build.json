@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.json",
+  "exclude": [
+    "**/stories/**/*",
+    "buildPackage.ts",
+    "./storybook-static/**/*",
+    "./jest*",
+    ".npmignore",
+    "/.gihub/**/*",
+    "node_modules", 
+    "./lib/**/*",
+    "./webpack4app",
+    "./scripts",
+    "*/__tests__",
+    ".storybook"
+  ]
+}
