@@ -1,0 +1,25 @@
+{
+  "name": "@devinmarra/localize",
+  "version": "1.0.0",
+  "description": "A collection of localization tools built on FormatJS & i18n",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Devinmarra/Localize.git"
+  },
+  "keywords": [
+    "formatjs",
+    "i18n",
+    "internationalization",
+    "localization"
+  ],
+  "author": "Devin Marra",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Devinmarra/Localize/issues"
+  },
+  "homepage": "https://github.com/Devinmarra/Localize#readme"
+}
