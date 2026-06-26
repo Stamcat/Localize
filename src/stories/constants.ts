@@ -31,5 +31,6 @@ export const LOCALE_OPTIONS = [
     "en-NZ",
     "fr-PF",
     // Antarctica
+    // trivial commit to test build
     "en-AQ",
 ];
