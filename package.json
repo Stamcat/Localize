@@ -1,11 +1,11 @@
 {
-  "name": "@devinmarra/localize",
+  "name": "@stamcat/localize",
   "version": "1.0.3",
   "description": "A collection of localization tools built on FormatJS & i18n",
   "main": "index.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Devinmarra/Localize.git"
+    "url": "git+https://github.com/Stamcat/Localize.git"
   },
   "keywords": [
     "formatjs",
@@ -16,12 +16,12 @@
   "author": "Devin Marra",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Devinmarra/Localize/issues"
+    "url": "https://github.com/Stamcat/Localize/issues"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
-  "homepage": "https://github.com/Devinmarra/Localize#readme",
+  "homepage": "https://github.com/Stamcat/Localize#readme",
   "scripts": {
     "build:clean": "rm -rf ./lib",
     "build:compile": "tsc -p tsconfig.build.json",
