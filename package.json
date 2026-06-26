@@ -1,6 +1,6 @@
 {
   "name": "@devinmarra/localize",
-  "version": "1.0.2-alpha.1",
+  "version": "1.0.2-alpha.2",
   "description": "A collection of localization tools built on FormatJS & i18n",
   "main": "index.ts",
   "repository": {
