@@ -43,7 +43,7 @@ export function createLocalize(defaultLocale = "en-US") {
         /**
          * Returns a flattened object for you to add to memory using setTranslations or appendMessages
          */
-        prepareMessages: (locale: string, fetchedMessages: object, delimiter?: string) => {
+        prepareMessages: (locale: string, fetchedMessages: object, delimiter: string = "/") => {
             let flattenedMessages: Record<string, Record<string, string>> = {};
 
             const currentLocale = localeMap[locale];

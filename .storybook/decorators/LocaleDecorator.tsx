@@ -74,7 +74,13 @@ const localeBundles: Record<SupportedLocale, Record<string, Record<string, unkno
 
 export const applyLocale = (locale: SupportedLocale) => {
     Localize.setLocale(locale);
-    const messages: Record<string, string> = Localize.prepareMessages(locale, localeBundles[locale][locale]);
+
+    const bundle = localeBundles[locale];
+    const localePayload = bundle[locale] ?? bundle[Object.keys(bundle)[0]] ?? {};
+
+    // Story IDs use slash-delimited keys (e.g. report-header/report-title).
+    // Force slash flattening so lookup keys match formatMessage IDs.
+    const messages: Record<string, string> = Localize.prepareMessages(locale, localePayload, "/");
     Localize.setTranslations(messages);
 };
 
@@ -102,10 +108,9 @@ export const LocaleDecorator: Decorator = (Story, context) => {
 
     return  <>
         <div style={{ display: "grid", gap: "12px", marginBottom: "12px" }}>
-            <label htmlFor="storybook-locale" style={{display: "inline-flex", gap: "8px", alignItems: "center"}}>Locale: 
-            <select value={locale} onChange={onLocaleChange}>
+            <label htmlFor="storybook-locale" style={{display: "inline-flex", gap: "8px", alignItems: "center"}}>Locale: <select value={locale} onChange={onLocaleChange}>
                 {Object.keys(localeBundles).map((opt) => {
-                    return <option value={opt}>{opt}</option>
+                    return <option value={opt} key={opt}>{opt}</option>
                 })}
             </select>
             </label>
