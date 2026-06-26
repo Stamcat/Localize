@@ -8,7 +8,7 @@
   "eslint.codeActionsOnSave.mode": "problems",
   "prettier.requireConfig": true,
   "eslint.format.enable": true,
-  "cSpell.words": ["bizworks", "Downline", "dsid"],
+  "cSpell.words": [],
   "editor.tabCompletion": "on",
   "editor.formatOnSave": false,
   "editor.defaultFormatter": "esbenp.prettier-vscode",

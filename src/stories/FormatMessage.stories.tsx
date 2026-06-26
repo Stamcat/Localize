@@ -29,7 +29,7 @@ const meta: Meta<FormatMessageArgs> = {
                         .filter((value) => value !== undefined)
                         .map(toArgSource)
                         .join(", ");
-                    return `import { Localize } from "@herbalifedev/hlf-localize";\n\nLocalize.formatMessage(${args});`;
+                    return `import { Localize } from "localize";\n\nLocalize.formatMessage(${args});`;
                 },
             },
         },

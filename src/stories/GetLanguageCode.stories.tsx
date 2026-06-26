@@ -12,7 +12,7 @@ const meta: Meta = {
         docs: {
             source: {
                 transform: () =>
-                    `import { Localize } from "@herbalifedev/hlf-localize";\n\nLocalize.getLanguageCode();`,
+                    `import { Localize } from "localize";\n\nLocalize.getLanguageCode();`,
             },
         },
     },

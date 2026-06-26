@@ -20,7 +20,7 @@ const meta: Meta<GetCountryCodeArgs> = {
         docs: {
             source: {
                 transform: (_src: string, context: { args: GetCountryCodeArgs }) =>
-                    `import { Localize } from "@herbalifedev/hlf-localize";\n\nLocalize.getMeasureFormat("${context.args.locale}");\n`,
+                    `import { Localize } from "localize";\n\nLocalize.getMeasureFormat("${context.args.locale}");\n`,
             },
         },
     },

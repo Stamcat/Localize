@@ -56,7 +56,7 @@ const meta: Meta<GetCountryNameArgs> = {
         docs: {
             source: {
                 transform: (_src: string, context: { args: GetCountryNameArgs }) =>
-                    `import { Localize } from "@herbalifedev/hlf-localize";\n\nLocalize.getCountryName("${context.args.locale}");`,
+                    `import { Localize } from "localize";\n\nLocalize.getCountryName("${context.args.locale}");`,
             },
         },
     },

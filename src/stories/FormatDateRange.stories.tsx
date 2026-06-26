@@ -23,7 +23,7 @@ const meta: Meta<FormatDateRangeArgs> = {
                     const f = typeof from === "string" ? `"${from}"` : String(from);
                     const t = typeof to === "string" ? `"${to}"` : String(to);
                     const o = opts ? `, ${JSON.stringify(opts)}` : "";
-                    return `import { Localize } from "@herbalifedev/hlf-localize";\n\nLocalize.formatDateRange(${f}, ${t}${o});`;
+                    return `import { Localize } from "localize";\n\nLocalize.formatDateRange(${f}, ${t}${o});`;
                 },
             },
         },

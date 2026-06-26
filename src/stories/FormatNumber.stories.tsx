@@ -19,7 +19,7 @@ const meta: Meta<FormatNumberArgs> = {
             source: {
                 transform: (_src: string, { args: { value, opts } }: { args: FormatNumberArgs }) => {
                     const o = opts ? `, ${JSON.stringify(opts)}` : "";
-                    return `import { Localize } from "@herbalifedev/hlf-localize";\n\nLocalize.formatNumber(${value}${o});`;
+                    return `import { Localize } from "localize";\n\nLocalize.formatNumber(${value}${o});`;
                 },
             },
         },
