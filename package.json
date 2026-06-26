@@ -1,9 +1,8 @@
 {
   "name": "@devinmarra/localize",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A collection of localization tools built on FormatJS & i18n",
   "main": "index.ts",
-
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Devinmarra/Localize.git"
