@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.0.6](https://github.com/Stamcat/Localize/compare/v1.0.5...v1.0.6) (2026-06-26)
+
+
+### Bug Fixes
+
+* fix entry declaration in package.json ([e49d112](https://github.com/Stamcat/Localize/commit/e49d112f2ecda20713bb164d0f3f3811c2d7d031))
+
 ## [1.0.5](https://github.com/Stamcat/Localize/compare/v1.0.4...v1.0.5) (2026-06-26)
 
 ## [1.0.4](https://github.com/Stamcat/Localize/compare/v1.0.3...v1.0.4) (2026-06-26)
