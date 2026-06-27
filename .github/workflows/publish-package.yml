@@ -50,9 +50,6 @@ jobs:
         with:
           node-version: 24
           registry-url: https://registry.npmjs.org
-    
-      - name: Check npm OIDC identity
-        run: npm whoami --registry https://registry.npmjs.org
 
       - name: Publish to npm
         run: |
@@ -83,7 +80,7 @@ jobs:
 
       - name: Publish to GitHub Packages
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_GITHUB_PACKAGES_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.SOME_STUPID_SECRET }}
         run: |
           cd lib
           if [ "${{ needs.build.outputs.prerelease }}" = "true" ]; then
