@@ -32,7 +32,14 @@ jobs:
 
       - name: publish package
         working-directory: ./lib
-        run: npm publish
+        run: |
+          if [ "${{ github.event.release.prerelease }}" = "true" ] || [ "${{ github.event.release.prerelease }}" = true ]; then
+            echo "Pre-release detected. Publishing to npm with tag..."
+            npm publish --access public --tag next --provenance
+          else
+            echo "Stable release detected. Publishing to npm normally..."
+            npm publish --access public --provenance
+          fi
         if: ${{ always() }}
 
       - name: Setup Node for GitHub Packages
@@ -42,9 +49,16 @@ jobs:
           registry-url: 'https://npm.pkg.github.com' # Overwrites registry path to GitHub
           scope: '@stamcat' # Binds the package structure explicitly to your GitHub scope
 
-      - name: publish package
+      - name: publish GitHub package
         working-directory: ./lib
-        run: npm publish --registry https://npm.pkg.github.com
+        run: |
+          if [ "${{ github.event.release.prerelease }}" = "true" ] || [ "${{ github.event.release.prerelease }}" = true ]; then
+            echo "Pre-release detected. Publishing to GitHub Packages with tag..."
+            npm publish --tag next
+          else
+            echo "Stable release detected. Publishing to GitHub Packages normally..."
+            npm publish
+          fi 
         if: ${{ always() }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_GITHUB_PACKAGES_TOKEN }}
