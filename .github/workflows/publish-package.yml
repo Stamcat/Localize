@@ -51,6 +51,24 @@ jobs:
           node-version: 24
           registry-url: https://registry.npmjs.org
 
+      - name: Remove rogue npmrc files
+        run: |
+            rm -f ~/.npmrc
+            rm -f .npmrc
+            rm -f lib/.npmrc
+
+      - name: Debug npmrc
+        run: |
+            echo "---- root .npmrc ----"
+            cat ~/.npmrc || echo "(none)"
+            echo "---- workspace .npmrc ----"
+            cat .npmrc || echo "(none)"
+            echo "---- lib .npmrc ----"
+            cat lib/.npmrc || echo "(none)"
+
+      - name: whoami check 
+        run: npm whoami --registry https://registry.npmjs.org
+
       - name: Publish to npm
         run: |
           cd lib
