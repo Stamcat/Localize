@@ -50,6 +50,9 @@ jobs:
         with:
           node-version: 24
           registry-url: https://registry.npmjs.org
+    
+      - name: Check npm OIDC identity
+        run: npm whoami --registry https://registry.npmjs.org
 
       - name: Publish to npm
         run: |
