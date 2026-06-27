@@ -1,8 +1,7 @@
 {
   "name": "@stamcat/localize",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "A collection of localization tools built on FormatJS & i18n",
-  "main": "index.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Stamcat/Localize.git"
@@ -18,6 +17,8 @@
   "bugs": {
     "url": "https://github.com/Stamcat/Localize/issues"
   },
+  "types": "index.d.ts",
+  "main": "index.js",
   "homepage": "https://github.com/Stamcat/Localize#readme",
   "scripts": {
     "build:clean": "rm -rf ./lib",
