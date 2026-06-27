@@ -14,7 +14,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-      
+        with:
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org' # Points to public npm 
+          
       - name: install
         run: npm install
         if: ${{ always() }}
@@ -24,13 +27,7 @@ jobs:
       - name: build package
         run: npm run build:src
 
-      - name: Setup Node for npm
-        uses: actions/setup-node@v4
-        with:
-          node-version: '24'
-          registry-url: 'https://registry.npmjs.org' # Points to public npm
-
-      - name: publish package
+      - name: publish npm package
         working-directory: ./lib
         run: |
           if [ "${{ github.event.release.prerelease }}" = "true" ] || [ "${{ github.event.release.prerelease }}" = true ]; then
@@ -42,23 +39,23 @@ jobs:
           fi
         if: ${{ always() }}
 
-      - name: Setup Node for GitHub Packages
-        uses: actions/setup-node@v4
-        with:
-          node-version: '24'
-          registry-url: 'https://npm.pkg.github.com' # Overwrites registry path to GitHub
-          scope: '@stamcat' # Binds the package structure explicitly to your GitHub scope
+    #   - name: Setup Node for GitHub Packages
+    #     uses: actions/setup-node@v4
+    #     with:
+    #       node-version: '24'
+    #       registry-url: 'https://npm.pkg.github.com' # Overwrites registry path to GitHub
+    #       scope: '@stamcat' # Binds the package structure explicitly to your GitHub scope
 
-      - name: publish GitHub package
-        working-directory: ./lib
-        run: |
-          if [ "${{ github.event.release.prerelease }}" = "true" ] || [ "${{ github.event.release.prerelease }}" = true ]; then
-            echo "Pre-release detected. Publishing to GitHub Packages with tag..."
-            npm publish --tag next
-          else
-            echo "Stable release detected. Publishing to GitHub Packages normally..."
-            npm publish
-          fi 
-        if: ${{ always() }}
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_GITHUB_PACKAGES_TOKEN }}
+    #   - name: publish GitHub package
+    #     working-directory: ./lib
+    #     run: |
+    #       if [ "${{ github.event.release.prerelease }}" = "true" ] || [ "${{ github.event.release.prerelease }}" = true ]; then
+    #         echo "Pre-release detected. Publishing to GitHub Packages with tag..."
+    #         npm publish --registry https://npm.pkg.github.com --tag next
+    #       else
+    #         echo "Stable release detected. Publishing to GitHub Packages normally..."
+    #         npm publish --registry https://npm.pkg.github.com
+    #       fi 
+    #     if: ${{ always() }}
+    #     env:
+    #       NODE_AUTH_TOKEN: ${{ secrets.NPM_GITHUB_PACKAGES_TOKEN }}
