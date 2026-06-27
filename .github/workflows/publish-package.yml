@@ -12,6 +12,7 @@ jobs:
       id-token: write      # Required for tokenless npm Trusted Publishing
       packages: write      # Required to write to GitHub Packages
     steps:
+      - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
       
       - name: install
