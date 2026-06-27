@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.0.7-alpha.4](https://github.com/Stamcat/Localize/compare/v1.0.7-alpha.3...v1.0.7-alpha.4) (2026-06-27)
+
 ## [1.0.7-alpha.3](https://github.com/Stamcat/Localize/compare/v1.0.7-alpha.2...v1.0.7-alpha.3) (2026-06-27)
 
 ## [1.0.7-alpha.2](https://github.com/Stamcat/Localize/compare/v1.0.7-alpha.1...v1.0.7-alpha.2) (2026-06-27)
