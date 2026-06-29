@@ -8,12 +8,12 @@ type GetCountryCodeArgs = {
 };
 
 const GetMeasureFormatPreview = (args: GetCountryCodeArgs) => {
-    return <>{Localize.getMeasureFormat(args.locale)}</>;
+    return <>{Localize.measure.getFormat(args.locale)}</>;
 };
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<GetCountryCodeArgs> = {
-    title: "Values/GetMeasureFormat",
+    title: "Measurements/GetMeasureFormat",
     component: GetMeasureFormatPreview,
     parameters: {
         disableLocaleDecorator: true,

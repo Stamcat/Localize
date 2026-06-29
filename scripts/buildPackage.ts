@@ -34,10 +34,23 @@ const createIgnoreFile = () => {
     console.log("ignore file created");
 };
 
+const copyReadme = () => {
+    const readmeSrc = path.join(process.cwd(), "README.md");
+    const readmeDest = path.join(process.cwd(), "lib", "README.md");
+    console.log(`writing ${readmeSrc} to ${readmeDest}`);
+
+    const ignoreFile = fse.readFileSync(readmeSrc).toString("utf-8");
+    const src = Buffer.from(ignoreFile, "utf-8");
+    fse.writeFileSync(readmeDest, src as never);
+
+    console.log("readme file created");
+};
+
 export class PackageBuilder {
     static main() {
         console.log("Beginning Build");
         createPackageJson();
         createIgnoreFile();
+        copyReadme();
     }
 }

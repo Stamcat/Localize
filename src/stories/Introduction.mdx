@@ -2,10 +2,14 @@
   # Localize - Making FormatJS & i18n EASY.
   <p>{`This tool handles storage and provides adapters to simplify implementation of i18n / FormatJS in your application`}</p>
   
-  # Client-side rendering
+  ### Do I need this library? 
+    Since Localize simply implements FormatJS/i18n, all of the functionalities we rely on come out of the box from those libraries. 
+    Localize just makes it dead simple to implement by handling storage and some of the common implementation patterns.
+    
+  ## Client-side rendering
   <p>{`For client-side rendering, the built-in singleton (as shown in this storybook) should solve 95% of your usecases`}</p>
 
-# Server-side rendering
+## Server-side rendering
 
     <p>{`For server-side rendering, you'll need to create an instance so that you don't run into server-side cache problems`}</p>
 
@@ -22,7 +26,7 @@
         </code>
     </pre>
 
-# Fetching, Validating & Storage
+## Fetching, Validating & Storage
 
   <p>
     {`Whether you're using the singleton or the instance, you then need to fetch your localized content from your api, set your locale and save the messages into storage.`}
@@ -69,7 +73,7 @@
 
   </pre>
 
-# Implementation
+## Implementation
 
   <p>{`From there, you simply import your localize instance across your application`}</p>
   <pre>

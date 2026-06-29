@@ -5,6 +5,8 @@ import { flatten } from "flat";
 import { IntlMessageFormatOptions } from "./types";
 import { createLocalizeInstance } from "./storage";
 import { localeMap } from "./constants";
+import { convertLength, convertWeight, getMeasureFormat } from "./measurements/measurements";
+import { MeasureFormat, LengthUnit, MassUnit } from "./measurements/types";
 
 export function createLocalize(defaultLocale = "en-US") {
     const localeInstance = createLocalizeInstance(defaultLocale);
@@ -82,17 +84,46 @@ export function createLocalize(defaultLocale = "en-US") {
                 localeInstance.setTranslations(newMessages);
             }
         },
-        /**
-         * Imperial vs Metric system formatting for a locale.
-         * No locale will select locale saved in Localize memory
-         * @param locale
-         * @returns
-         */
-        getMeasureFormat: (locale?: string): "metric" | "imperial" => {
-            const l = locale || instance.getLocale();
-            const region = new Intl.Locale(l).region;
-            const imperialRegions = ["US", "LR", "MM"];
-            return imperialRegions.includes(region || "US") ? "imperial" : "metric";
+        measure: {
+            /**
+             * Imperial vs Metric system formatting for a locale.
+             * No locale will select locale saved in Localize memory
+             * @param locale
+             * @returns
+             */
+            getFormat: (locale?: string): MeasureFormat => {
+                return getMeasureFormat(locale || instance.getLocale());
+            },
+            /**
+             * Converts a length value from one unit to another.
+             *
+             * Supports all metric, imperial, and astronomical units defined in LengthUnit.
+             * The compound unit "ft-in" may appear as the `to` target — in that case the
+             * result is expressed as a decimal feet value and the caller is responsible for
+             * splitting it into feet + inches for display (e.g. `Math.floor(result)` ft and
+             * `Math.round((result % 1) * 12)` in).
+             *
+             * Returns `null` when the input value is not a finite number.
+             * @param value
+             * @param from
+             * @param to
+             * @returns
+             */
+            convertLength: (value: string | number, from: LengthUnit, to: LengthUnit): number | null => {
+                return convertLength(value, from, to);
+            },
+            /**
+             * Converts a unit of mass from one unit to another.
+             *
+             * Supports metric, imperial and astronomical units as defined in MassUnit.
+             * @param value
+             * @param from
+             * @param to
+             * @returns
+             */
+            convertWeight: (value: string | number, from: MassUnit, to: MassUnit): number | null => {
+                return convertWeight(value, from, to);
+            },
         },
         /**
          * Returns the localized country name.
