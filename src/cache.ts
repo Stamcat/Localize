@@ -1,3 +1,5 @@
+import { AsyncLocalStorage } from "node:async_hooks";
+
 /**
  * Request-scoped memoization, equivalent to React's `cache()` without a React dependency.
  *
@@ -38,13 +40,7 @@ type ALS = {
 
 let als: ALS | null = null;
 
-try {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports -- dynamic require needed for optional Node.js built-in (browser environments lack async_hooks)
-    const { AsyncLocalStorage } = require("async_hooks") as typeof import("async_hooks");
-    als = new AsyncLocalStorage<ContextStore>();
-} catch {
-    // Browser or environment without async_hooks — global fallback will be used.
-}
+als = new AsyncLocalStorage<ContextStore>();
 
 /** Module-level fallback for browser environments or code running outside runWithCache. */
 const globalStore: ContextStore = new Map();
