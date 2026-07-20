@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "flat": "6.0.1",
-    "react-intl": "10.1.13"
+    "react-intl": "10.1.14"
   },
   "devDependencies": {
     "@commitlint/cli": "17.6.6",

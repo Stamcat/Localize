@@ -1,6 +1,6 @@
 import { FormatNumberOptions, FormatDateOptions, MessageDescriptor, PrimitiveType } from "react-intl";
 import { Formats, FormatXMLElementFn, IntlMessageFormat } from "intl-messageformat";
-import { createIntlFunctions } from "./intl";
+import { createIntlFunctions, IntlProviderMode } from "./intl";
 import { flatten } from "flat";
 import { IntlMessageFormatOptions } from "./types";
 import { createLocalizeInstance } from "./storage";
@@ -8,9 +8,9 @@ import { localeMap } from "./constants";
 import { convertLength, convertWeight, getMeasureFormat } from "./measurements/measurements";
 import { MeasureFormat, LengthUnit, MassUnit } from "./measurements/types";
 
-export function createLocalize(defaultLocale = "en-US") {
+export function createLocalize(defaultLocale = "en-US", provider: IntlProviderMode = "client") {
     const localeInstance = createLocalizeInstance(defaultLocale);
-    const { appIntl, appIntlFormatOverride } = createIntlFunctions(localeInstance);
+    const { appIntl, appIntlFormatOverride } = createIntlFunctions(localeInstance, provider);
 
     const instance = {
         /**

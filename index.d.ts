@@ -1,6 +1,8 @@
 import type { FormatDateOptions, FormatNumberOptions, MessageDescriptor, PrimitiveType } from "react-intl";
 import type { FormatXMLElementFn, Formats, Options as IntlMessageFormatOptions } from "intl-messageformat";
 
+export type IntlProviderMode = "client" | "server";
+
 export type LocalizeMessageValues = Record<string, PrimitiveType | FormatXMLElementFn<string, string>>;
 
 export interface LocalizePendingStore {
@@ -41,7 +43,7 @@ export interface LocalizeInstance {
     formatNumber: (value: number, opts?: FormatNumberOptions) => string;
 }
 
-export declare function createLocalize(defaultLocale?: string): LocalizeInstance;
+export declare function createLocalize(defaultLocale?: string, provider?: IntlProviderMode): LocalizeInstance;
 
 declare const Localize: LocalizeInstance;
 export default Localize;
