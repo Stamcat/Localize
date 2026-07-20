@@ -1,16 +1,18 @@
 import type { IntlShape } from "react-intl";
 
 const clientCreateIntlMock = jest.fn(() => ({ locale: "en-US" }) as IntlShape);
-const createIntlCacheMock = jest.fn(() => ({}));
+const clientCreateIntlCacheMock = jest.fn(() => ({}));
 const serverCreateIntlMock = jest.fn(() => ({ locale: "en-US" }) as IntlShape);
+const serverCreateIntlCacheMock = jest.fn(() => ({}));
 
 jest.mock("react-intl", () => ({
     createIntl: clientCreateIntlMock,
-    createIntlCache: createIntlCacheMock,
+    createIntlCache: clientCreateIntlCacheMock,
 }));
 
 jest.mock("react-intl/server", () => ({
     createIntl: serverCreateIntlMock,
+    createIntlCache: serverCreateIntlCacheMock,
 }));
 
 jest.mock("flat", () => ({
@@ -23,8 +25,9 @@ import { createLocalizeInstance } from "../storage";
 describe("createIntlFunctions", () => {
     beforeEach(() => {
         clientCreateIntlMock.mockClear();
-        createIntlCacheMock.mockClear();
+        clientCreateIntlCacheMock.mockClear();
         serverCreateIntlMock.mockClear();
+        serverCreateIntlCacheMock.mockClear();
     });
 
     it("uses the client intl provider by default", () => {
@@ -33,7 +36,9 @@ describe("createIntlFunctions", () => {
         intl.appIntl();
 
         expect(clientCreateIntlMock).toHaveBeenCalledTimes(1);
+        expect(clientCreateIntlCacheMock).toHaveBeenCalledTimes(1);
         expect(serverCreateIntlMock).not.toHaveBeenCalled();
+        expect(serverCreateIntlCacheMock).not.toHaveBeenCalled();
     });
 
     it("uses the server intl provider when requested", () => {
@@ -42,6 +47,8 @@ describe("createIntlFunctions", () => {
         intl.appIntl();
 
         expect(serverCreateIntlMock).toHaveBeenCalledTimes(1);
+        expect(serverCreateIntlCacheMock).toHaveBeenCalledTimes(1);
         expect(clientCreateIntlMock).not.toHaveBeenCalled();
+        expect(clientCreateIntlCacheMock).not.toHaveBeenCalled();
     });
 });

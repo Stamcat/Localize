@@ -1,5 +1,5 @@
-import { IntlShape, createIntl as createClientIntl, createIntlCache } from "react-intl";
-import { createIntl as createServerIntl } from "react-intl/server";
+import { IntlShape, createIntl as createClientIntl, createIntlCache as createClientIntlCache } from "react-intl";
+import { createIntl as createServerIntl, createIntlCache as createServerIntlCache } from "react-intl/server";
 import { intlOverrideMap, localeMap } from "./constants";
 import { Locale, LocalizeInstance } from "./storage";
 import { flatten } from "flat";
@@ -15,6 +15,11 @@ export type IntlFunctions = {
 const intlFactoryMap: Record<IntlProviderMode, typeof createClientIntl> = {
     client: createClientIntl,
     server: createServerIntl,
+};
+
+const intlCacheFactoryMap: Record<IntlProviderMode, typeof createClientIntlCache> = {
+    client: createClientIntlCache,
+    server: createServerIntlCache,
 };
 
 let flattenedMessages: Record<string, Record<string, string>> = {};
@@ -47,6 +52,7 @@ export function createIntlFunctions(
     let intl: IntlShape;
     let intlOverride: IntlShape;
     const createIntl = intlFactoryMap[provider];
+    const createIntlCache = intlCacheFactoryMap[provider];
 
     const appIntl = () => {
         const l = localeInstance.getLocale();
