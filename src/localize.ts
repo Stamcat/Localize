@@ -8,7 +8,7 @@ import { localeMap } from "./constants";
 import { convertLength, convertWeight, getMeasureFormat } from "./measurements/measurements";
 import { MeasureFormat, LengthUnit, MassUnit } from "./measurements/types";
 
-export function createLocalize(defaultLocale = "en-US", provider: IntlProviderMode = "client") {
+export function createLocalize(provider: IntlProviderMode = "client", defaultLocale = "en-US") {
     const localeInstance = createLocalizeInstance(defaultLocale);
     const { appIntl, appIntlFormatOverride } = createIntlFunctions(localeInstance, provider);
 

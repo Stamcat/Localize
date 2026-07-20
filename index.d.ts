@@ -43,7 +43,7 @@ export interface LocalizeInstance {
     formatNumber: (value: number, opts?: FormatNumberOptions) => string;
 }
 
-export declare function createLocalize(defaultLocale?: string, provider?: IntlProviderMode): LocalizeInstance;
+export declare function createLocalize(provider?: IntlProviderMode, defaultLocale?: string): LocalizeInstance;
 
 declare const Localize: LocalizeInstance;
 export default Localize;

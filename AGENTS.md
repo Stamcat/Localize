@@ -37,10 +37,10 @@ Use `createLocalize()` when state must be isolated.
 This is required for server-side rendering and any per-request usage.
 
 ```ts
-const localize = createLocalize("en-US", "server");
+const localize = createLocalize("server", "en-US");
 ```
 
-`createLocalize(defaultLocale?, provider?)` supports:
+`createLocalize(provider?, defaultLocale?)` supports:
 
 -   `"client"` as the default provider
 -   `"server"` to use `react-intl/server`
@@ -56,7 +56,7 @@ Preferred pattern:
 import { cache } from "react";
 import { createLocalize } from "@stamcat/localize";
 
-export const localize = cache(() => createLocalize("en-US", "server"));
+export const localize = cache(() => createLocalize("server", "en-US"));
 ```
 
 Before formatting, set the locale and messages for that request.
