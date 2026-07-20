@@ -1,6 +1,6 @@
 {
   "name": "@stamcat/localize",
-  "version": "1.0.10",
+  "version": "1.0.11-alpha.0",
   "description": "A collection of localization tools built on FormatJS & i18n",
   "repository": {
     "type": "git",
