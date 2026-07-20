@@ -69,7 +69,7 @@ Create isolated instances to avoid shared state across requests, and pass the se
 import { cache } from "react";
 import { createLocalize } from "@stamcat/localize";
 
-export const localize = cache(() => createLocalize("en-US", "server"));
+export const localize = cache(() => createLocalize("server", "en-US"));
 
 // Per request / render
 localize().setLocale("de-DE");
@@ -80,7 +80,7 @@ localize().setTranslations({
 const title = localize().formatMessage("report-header/report-title");
 ```
 
-`createLocalize(locale, provider)` supports:
+`createLocalize(provider, locale)` supports:
 
 -   `"client"` (default): uses `react-intl`
 -   `"server"`: uses `react-intl/server`
