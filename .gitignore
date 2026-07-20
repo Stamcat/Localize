@@ -5,3 +5,4 @@ lib/
 App_Data
 *storybook.log
 .DS_Store
+storybook-static/
