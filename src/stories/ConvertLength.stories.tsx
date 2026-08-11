@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { Localize } from "../localize";
-import type { LengthUnit } from "../measurements/types";
+import type { LengthUnit } from "../utilities/types";
 
 const UNIT_OPTIONS: LengthUnit[] = [
     // Imperial

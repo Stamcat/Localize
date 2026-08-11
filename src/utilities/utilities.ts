@@ -42,3 +42,18 @@ export const convertWeight = (value: string | number | null, from: MassUnit, to:
     const kilograms = numeric * fromFactor;
     return kilograms / toFactor;
 };
+/**
+ * There are over 2,000 ways that this function can return a useful value. Check the storybook for usage guidelines.
+ * @param unit
+ * @param locale
+ * @param quantity
+ * @returns
+ */
+export const getUnitLabel = (
+    unit: Intl.NumberFormatOptions["unit"],
+    locale: Intl.LocalesArgument,
+    quantity = 1,
+): string =>
+    new Intl.NumberFormat(locale, { style: "unit", unit, unitDisplay: "long" })
+        .formatToParts(quantity)
+        .find((p) => p.type === "unit")?.value ?? String(unit);
