@@ -5,8 +5,8 @@ import { flatten } from "flat";
 import { IntlMessageFormatOptions } from "./types";
 import { createLocalizeInstance } from "./storage";
 import { localeMap } from "./constants";
-import { convertLength, convertWeight, getMeasureFormat } from "./measurements/measurements";
-import { MeasureFormat, LengthUnit, MassUnit } from "./measurements/types";
+import { convertLength, convertWeight, getMeasureFormat, getUnitLabel } from "./utilities/utilities";
+import { MeasureFormat, LengthUnit, MassUnit } from "./utilities/types";
 
 export function createLocalize(provider: IntlProviderMode = "client", defaultLocale = "en-US") {
     const localeInstance = createLocalizeInstance(defaultLocale);
@@ -31,6 +31,13 @@ export function createLocalize(provider: IntlProviderMode = "client", defaultLoc
          * Returns the language code of the locale registered in memory
          */
         getLanguageCode: () => localeInstance.getLanguageCode(),
+        /**
+         * You can use utility function directly. This just handles locale for you from memory to make things even easier.
+         */
+        getUnitLabel: (unit: Intl.NumberFormatOptions["unit"], locale?: Intl.LocalesArgument, quantity?: number) => {
+            return getUnitLabel(unit, locale || instance.getLocale(), quantity);
+        },
+
         pending: {
             get: (key: string) => localeInstance.getPending(key),
             set: (key: string, value: Promise<void>) => localeInstance.setPending(key, value),
