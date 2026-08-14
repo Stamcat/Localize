@@ -5,7 +5,14 @@ import { flatten } from "flat";
 import { IntlMessageFormatOptions } from "./types";
 import { createLocalizeInstance } from "./storage";
 import { localeMap } from "./constants";
-import { convertLength, convertWeight, getMeasureFormat, getUnitLabel } from "./utilities/utilities";
+import {
+    convertLength,
+    convertWeight,
+    formatCurrency,
+    getMeasureFormat,
+    getUnitLabel,
+    is24HourFormat,
+} from "./utilities/utilities";
 import { MeasureFormat, LengthUnit, MassUnit } from "./utilities/types";
 
 export function createLocalize(provider: IntlProviderMode = "client", defaultLocale = "en-US") {
@@ -36,6 +43,12 @@ export function createLocalize(provider: IntlProviderMode = "client", defaultLoc
          */
         getUnitLabel: (unit: Intl.NumberFormatOptions["unit"], locale?: Intl.LocalesArgument, quantity?: number) => {
             return getUnitLabel(unit, locale || instance.getLocale(), quantity);
+        },
+        /**
+         * You can use utility function directly. This just handles locale for you from memory to make things even easier.
+         */
+        is24HourFormat: (locale?: Intl.LocalesArgument) => {
+            return is24HourFormat(locale || instance.getLocale());
         },
 
         pending: {
@@ -216,6 +229,16 @@ export function createLocalize(provider: IntlProviderMode = "client", defaultLoc
         formatNumber: (value: Parameters<Intl.NumberFormat["format"]>[0], opts?: FormatNumberOptions) => {
             const intl = appIntlFormatOverride();
             return intl.formatNumber(value, opts);
+        },
+        /**
+         * This will automatically resolve currency from the locale you pass in
+         */
+        formatCurrency: (
+            value: Parameters<Intl.NumberFormat["format"]>[0],
+            locale?: Intl.LocalesArgument,
+            currency?: string,
+        ) => {
+            return formatCurrency(value, locale || instance.getLocale(), currency);
         },
     };
 
