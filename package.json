@@ -42,6 +42,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "country-to-currency": "3.0.1",
     "flat": "6.0.1",
     "react-intl": "10.1.14"
   },

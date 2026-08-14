@@ -1,5 +1,8 @@
 import { CONVERSION_TABLE, IMPERIAL_REGIONS, MASS_CONVERSION_TABLE } from "./constants";
 import { MeasureFormat, LengthUnit, MassUnit } from "./types";
+import countryToCurrency from "country-to-currency";
+
+const DEFAULT_CURRENCY = "USD";
 
 export const getMeasureFormat = (locale: string): MeasureFormat => {
     const region = new Intl.Locale(locale).region;
@@ -57,3 +60,66 @@ export const getUnitLabel = (
     new Intl.NumberFormat(locale, { style: "unit", unit, unitDisplay: "long" })
         .formatToParts(quantity)
         .find((p) => p.type === "unit")?.value ?? String(unit);
+
+export const is24HourFormat = (locale: Intl.LocalesArgument) => {
+    const options = new Intl.DateTimeFormat(locale, { hour: "numeric" }).resolvedOptions();
+    return options.hourCycle === "h23" || options.hourCycle === "h24";
+};
+
+export const getCurrencyByLocale = (locale?: string): string => {
+    if (!locale) {
+        return DEFAULT_CURRENCY;
+    }
+
+    const extensionCurrency = locale.match(/-u(?:-[a-z0-9]{2,8})*-cu-([a-z]{3})(?:-|$)/i)?.[1]?.toUpperCase();
+    if (extensionCurrency) {
+        return extensionCurrency;
+    }
+
+    try {
+        const parsedLocale = new Intl.Locale(locale).maximize();
+        const region = parsedLocale.region;
+        if (!region) {
+            return DEFAULT_CURRENCY;
+        }
+        return (countryToCurrency as Record<string, string>)[region] || DEFAULT_CURRENCY;
+    } catch {
+        return DEFAULT_CURRENCY;
+    }
+};
+
+export const formatCurrency = (
+    value: string | number | bigint | null,
+    locale?: Intl.LocalesArgument,
+    currency?: string,
+) => {
+    if (value === null) {
+        return "";
+    }
+
+    const numeric = typeof value === "string" ? Number.parseFloat(value) : Number(value);
+    if (!Number.isFinite(numeric)) {
+        return "";
+    }
+
+    const normalizedLocale = Array.isArray(locale)
+        ? locale.length
+            ? String(locale[0])
+            : undefined
+        : locale
+          ? String(locale)
+          : undefined;
+    const resolvedCurrency = currency?.toUpperCase() || getCurrencyByLocale(normalizedLocale);
+
+    try {
+        return new Intl.NumberFormat(normalizedLocale, {
+            style: "currency",
+            currency: resolvedCurrency,
+        }).format(numeric);
+    } catch {
+        return new Intl.NumberFormat(normalizedLocale, {
+            style: "currency",
+            currency: getCurrencyByLocale(normalizedLocale),
+        }).format(numeric);
+    }
+};

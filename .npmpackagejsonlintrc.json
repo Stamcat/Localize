@@ -1,0 +1,7 @@
+{
+  "extends": "npm-package-json-lint-config-default",
+  "rules": {
+    "no-caret-version-dependencies": "error",
+    "no-caret-version-devDependencies": "error"
+  }
+}
