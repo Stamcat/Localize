@@ -40,7 +40,7 @@ const meta: Meta<FormatCurrencyArgs> = {
         docs: {
             description: {
                 component:
-                    "Shows both ways to format currency: call the utility directly or call formatCurrency on a Localize instance created with createLocalize(). Pass an empty string (\"\") as currency to format as a plain number with no currency symbol.",
+                    'Shows both ways to format currency: call the utility directly or call formatCurrency on a Localize instance created with createLocalize(). Pass an empty string ("") as currency to format as a plain number with no currency symbol.',
             },
             source: {
                 transform: (_src: string, context: { args: FormatCurrencyArgs }) => {
