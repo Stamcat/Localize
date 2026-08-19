@@ -110,7 +110,10 @@ export const formatCurrency = (
           ? String(locale)
           : undefined;
     const resolvedCurrency = currency?.toUpperCase() || getCurrencyByLocale(normalizedLocale);
-
+    // if currency is empty, then format number.
+    if (currency === "") {
+        return new Intl.NumberFormat(normalizedLocale).format(numeric);
+    }
     try {
         return new Intl.NumberFormat(normalizedLocale, {
             style: "currency",
