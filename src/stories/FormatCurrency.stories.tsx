@@ -12,11 +12,12 @@ type FormatCurrencyArgs = {
 };
 
 const normalizeCurrency = (currency?: string): string | undefined => {
-    if (!currency) {
+    if (currency === undefined) {
         return undefined;
     }
+
     const trimmed = currency.trim();
-    return trimmed.length ? trimmed : undefined;
+    return trimmed.length ? trimmed : "";
 };
 
 const FormatCurrencyPreview = ({ value, locale, currency, mode }: FormatCurrencyArgs) => {
@@ -39,13 +40,13 @@ const meta: Meta<FormatCurrencyArgs> = {
         docs: {
             description: {
                 component:
-                    "Shows both ways to format currency: call the utility directly or call formatCurrency on a Localize instance created with createLocalize().",
+                    'Shows both ways to format currency: call the utility directly or call formatCurrency on a Localize instance created with createLocalize(). Pass an empty string ("") as currency to format as a plain number with no currency symbol.',
             },
             source: {
                 transform: (_src: string, context: { args: FormatCurrencyArgs }) => {
                     const { value, locale, currency, mode } = context.args;
                     const activeCurrency = normalizeCurrency(currency);
-                    const currencyArg = activeCurrency ? `, "${activeCurrency}"` : "";
+                    const currencyArg = activeCurrency === undefined ? "" : `, ${JSON.stringify(activeCurrency)}`;
 
                     if (mode === "utility") {
                         return `import { utilities } from "localize";\n\nutilities.formatCurrency(${value}, "${locale}"${currencyArg});`;
@@ -87,6 +88,15 @@ export const UtilityLocaleResolved: Story = {
     args: {
         mode: "utility",
         locale: "en-GB",
+        currency: undefined,
+    },
+};
+
+/** Calls the utility directly and overrides currency to empty string, formatting as plain number. */
+export const UtilityNoCurrencyOverride: Story = {
+    args: {
+        mode: "utility",
+        locale: "de-DE",
         currency: "",
     },
 };
@@ -105,6 +115,15 @@ export const InitializerLocaleResolved: Story = {
     args: {
         mode: "initializer",
         locale: "ja-JP",
+        currency: undefined,
+    },
+};
+
+/** Uses a Localize instance and overrides currency to empty string, formatting as plain number. */
+export const InitializerNoCurrencyOverride: Story = {
+    args: {
+        mode: "initializer",
+        locale: "fr-FR",
         currency: "",
     },
 };
