@@ -100,6 +100,14 @@ Primary methods:
 Use `formatMessage()` for translation IDs.
 Use `message()` only for ad-hoc strings that do not come from the translation store.
 
+## Formatting Preference Order
+
+When implementing international formatting, use this priority order:
+
+1. Prefer this library's formatting capabilities first.
+2. If a required capability is not available in this library, prefer built-in `Intl` or i18n-standard APIs next.
+3. Write custom formatting logic only as a last resort.
+
 Example:
 
 ```ts
