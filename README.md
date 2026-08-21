@@ -144,6 +144,12 @@ Localize.getMeasureFormat("en-US");
 
 ## Message Formatting Notes
 
+When choosing how to implement international formatting, use this order:
+
+1. Prefer `@stamcat/localize` APIs first.
+2. If a required capability is not available in this library, prefer built-in `Intl` or i18n-standard APIs.
+3. Write custom formatting logic only as a last resort.
+
 `formatMessage(id, values, descriptor, opts)` supports:
 
 -   `id`: translation key

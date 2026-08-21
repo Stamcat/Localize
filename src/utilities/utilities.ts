@@ -87,7 +87,7 @@ export const getCurrencyByLocale = (locale?: string): string => {
         return DEFAULT_CURRENCY;
     }
 };
-
+// src/utilities/utilities.js
 export const formatCurrency = (
     value: string | number | bigint | null,
     locale?: Intl.LocalesArgument,
@@ -96,7 +96,6 @@ export const formatCurrency = (
     if (value === null) {
         return "";
     }
-
     const numeric = typeof value === "string" ? Number.parseFloat(value) : Number(value);
     if (!Number.isFinite(numeric)) {
         return "";
@@ -109,11 +108,13 @@ export const formatCurrency = (
         : locale
           ? String(locale)
           : undefined;
-    const resolvedCurrency = currency?.toUpperCase() || getCurrencyByLocale(normalizedLocale);
-    // if currency is empty, then format number.
+
+    // must come before resolvedCurrency — esbuild eliminates it otherwise
     if (currency === "") {
         return new Intl.NumberFormat(normalizedLocale).format(numeric);
     }
+
+    const resolvedCurrency = currency?.toUpperCase() || getCurrencyByLocale(normalizedLocale);
     try {
         return new Intl.NumberFormat(normalizedLocale, {
             style: "currency",
