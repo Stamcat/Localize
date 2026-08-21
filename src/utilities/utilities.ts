@@ -87,43 +87,35 @@ export const getCurrencyByLocale = (locale?: string): string => {
         return DEFAULT_CURRENCY;
     }
 };
-// src/utilities/utilities.js
-export const formatCurrency = (
-    value: string | number | bigint | null,
-    locale?: Intl.LocalesArgument,
-    currency?: string,
+
+export const formatNumber = (
+    value: Parameters<Intl.NumberFormat["format"]>[0],
+    locale?: string,
+    opts?: Intl.NumberFormatOptions,
 ) => {
-    if (value === null) {
-        return "";
-    }
+    return Intl.NumberFormat(locale, opts).format(value);
+};
+
+// src/utilities/utilities.js
+export const formatCurrency = (value: string | number | bigint | null, locale?: string, currency?: string) => {
     const numeric = typeof value === "string" ? Number.parseFloat(value) : Number(value);
     if (!Number.isFinite(numeric)) {
         return "";
     }
-
-    const normalizedLocale = Array.isArray(locale)
-        ? locale.length
-            ? String(locale[0])
-            : undefined
-        : locale
-          ? String(locale)
-          : undefined;
-
-    // must come before resolvedCurrency — esbuild eliminates it otherwise
+    const resolvedCurrency = currency?.toUpperCase() || getCurrencyByLocale(locale);
+    // if currency is empty, then format number.
     if (currency === "") {
-        return new Intl.NumberFormat(normalizedLocale).format(numeric);
+        return new Intl.NumberFormat(locale).format(numeric);
     }
-
-    const resolvedCurrency = currency?.toUpperCase() || getCurrencyByLocale(normalizedLocale);
     try {
-        return new Intl.NumberFormat(normalizedLocale, {
+        return new Intl.NumberFormat(locale, {
             style: "currency",
             currency: resolvedCurrency,
         }).format(numeric);
     } catch {
-        return new Intl.NumberFormat(normalizedLocale, {
+        return new Intl.NumberFormat(locale, {
             style: "currency",
-            currency: getCurrencyByLocale(normalizedLocale),
+            currency: getCurrencyByLocale(locale),
         }).format(numeric);
     }
 };
