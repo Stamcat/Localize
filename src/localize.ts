@@ -233,11 +233,7 @@ export function createLocalize(provider: IntlProviderMode = "client", defaultLoc
         /**
          * This will automatically resolve currency from the locale you pass in
          */
-        formatCurrency: (
-            value: Parameters<Intl.NumberFormat["format"]>[0],
-            locale?: Intl.LocalesArgument,
-            currency?: string,
-        ) => {
+        formatCurrency: (value: Parameters<Intl.NumberFormat["format"]>[0], locale?: string, currency?: string) => {
             return formatCurrency(value, locale || instance.getLocale(), currency);
         },
     };
