@@ -78,7 +78,7 @@
     "jest-environment-jsdom": "29.1.2",
     "jest-localstorage-mock": "2.4.26",
     "jest-sonar-reporter": "2.0.0",
-    "js-yaml": "4.3.1",
+    "js-yaml": "4.3.2",
     "lint-staged": "13.2.3",
     "npm-package-json-lint": "7.0.0",
     "npm-package-json-lint-config-default": "6.0.0",
@@ -100,6 +100,6 @@
   },
   "overrides": {
     "brace-expansion": "5.0.9",
-    "js-yaml": "4.3.1"
+    "js-yaml": "4.3.2"
   }
 }
