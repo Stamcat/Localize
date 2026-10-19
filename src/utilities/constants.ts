@@ -1,4 +1,4 @@
-import { LengthUnit, MassUnit } from "./types";
+import { LengthUnit, MassUnit, VolumeUnit } from "./types";
 
 export const IMPERIAL_REGIONS = ["US", "LR", "MM"] as const;
 /**
@@ -49,6 +49,28 @@ export const MASS_CONVERSION_TABLE: Record<MassUnit, number> = {
     M_earth: 5.972_2e24,
     M_jup: 1.898_13e27,
     M_sun: 1.988_47e30,
+};
+
+/**
+ * Conversion factors to liters (base unit). Imperial values are US customary fluid volumes.
+ */
+export const VOLUME_CONVERSION_TABLE: Record<VolumeUnit, number> = {
+    // Metric
+    ml: 0.001,
+    cc: 0.001,
+    cl: 0.01,
+    dl: 0.1,
+    l: 1,
+    m3: 1_000,
+    // Imperial (US customary)
+    tsp: 0.004_928_921_593_75,
+    tbsp: 0.014_786_764_781_2,
+    oz: 0.029_573_529_562_5,
+    cup: 0.236_588_236_5,
+    pt: 0.473_176_473,
+    qt: 0.946_352_946,
+    gal: 3.785_411_784,
+    in3: 0.016_387_064,
 };
 
 export const SIMPLE_UNIT_OPTIONS = [
