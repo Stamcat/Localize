@@ -1,5 +1,5 @@
-import { CONVERSION_TABLE, IMPERIAL_REGIONS, MASS_CONVERSION_TABLE } from "./constants";
-import { MeasureFormat, LengthUnit, MassUnit } from "./types";
+import { CONVERSION_TABLE, IMPERIAL_REGIONS, MASS_CONVERSION_TABLE, VOLUME_CONVERSION_TABLE } from "./constants";
+import { MeasureFormat, LengthUnit, MassUnit, VolumeUnit } from "./types";
 import countryToCurrency from "country-to-currency";
 
 const DEFAULT_CURRENCY = "USD";
@@ -44,6 +44,23 @@ export const convertWeight = (value: string | number | null, from: MassUnit, to:
 
     const kilograms = numeric * fromFactor;
     return kilograms / toFactor;
+};
+
+export const convertVolume = (value: string | number | null, from: VolumeUnit, to: VolumeUnit): number | null => {
+    if (value === null) {
+        return null;
+    }
+
+    const numeric = typeof value === "string" ? Number.parseFloat(value) : value;
+    if (!Number.isFinite(numeric)) {
+        return null;
+    }
+
+    const fromFactor = VOLUME_CONVERSION_TABLE[from];
+    const toFactor = VOLUME_CONVERSION_TABLE[to];
+
+    const liters = numeric * fromFactor;
+    return liters / toFactor;
 };
 /**
  * There are over 2,000 ways that this function can return a useful value. Check the storybook for usage guidelines.

@@ -6,6 +6,15 @@ This package is a stateful localization helper built on top of `react-intl` and 
 It does not expose a React provider component or a hook API.
 AI agents should use the exported helper instance APIs directly.
 
+## Code Quality Bar
+
+This is a library, not an application. Code under `src/` (excluding `src/stories/`) is consumed by other projects
+and must be durable, portable, and reusable: no half-finished abstractions, no partial/incomplete constants or
+lookup tables, no speculative types added "just in case." If a change isn't correct and complete, don't make it.
+
+Storybook stories (`src/stories/`) are the only place shortcuts for convenience are acceptable, since they exist to
+demonstrate usage, not to be consumed as library code.
+
 ## Imports
 
 Client-side code:
@@ -157,12 +166,15 @@ Use:
 -   `Localize.measure.getFormat(locale?)`
 -   `Localize.measure.convertLength(value, from, to)`
 -   `Localize.measure.convertWeight(value, from, to)`
+-   `Localize.measure.convertVolume(value, from, to)`
+-   `Localize.measure.getLengthUnitLabel(unit, locale?, quantity?)`
 
 Example:
 
 ```ts
 const system = Localize.measure.getFormat("en-US");
 const miles = Localize.measure.convertLength(1000, "m", "mi");
+const label = Localize.measure.getLengthUnitLabel("mi", "de-DE"); // "Meilen"
 ```
 
 ## Utility Functions
@@ -183,12 +195,20 @@ Available functions:
 
 -   `getMeasureFormat(locale)` — returns `"metric"` or `"imperial"` based on the locale's region.
 -   `convertLength(value, from, to)` — converts a length between units (`ft`, `in`, `ft-in`, `mi`, `yd`, `cm`, `m`,
-    `km`, `nm`, `μm`, `mm`, and astronomical units like `au`, `ly`, `pc`). Returns `null` for `null` or non-numeric
-    input.
+    `km`, `nm`, `μm`, `mm`, and astronomical units like `au`, `ly`, `pc`). `from`/`to` also accept the full-length
+    word form of any of those units, singular or plural and case-insensitive (e.g. `"meter"`, `"Feet"`). Returns
+    `null` for `null` or non-numeric input.
+-   `convertVolume(value, from, to)` — converts a volume between units (`ml`, `cc`, `cl`, `dl`, `l`, `m3`, and US
+    customary fluid volumes `tsp`, `tbsp`, `oz`, `cup`, `pt`, `qt`, `gal`, `in3`). Returns `null` for `null` or
+    non-numeric input.
 -   `convertWeight(value, from, to)` — converts a mass between units (`oz`, `lb`, `st`, `ton`, `gr`, `μg`, `mg`, `g`,
     `kg`, `t`, and astronomical masses like `M_earth`, `M_sun`). Returns `null` for `null` or non-numeric input.
 -   `getUnitLabel(unit, locale, quantity?)` — returns the long display label for an `Intl.NumberFormatOptions["unit"]`
     (e.g. `"kilometer"`) for the given locale and quantity.
+-   `getLengthUnitLabel(unit, locale, quantity?)` — resolves the localized long-form label for any unit accepted by
+    `convertLength`'s `from`/`to` (abbreviated code or full-length word, singular/plural, case-insensitive), e.g.
+    `getLengthUnitLabel("miles", "de-DE", 5)` returns `"Meilen"`. `"ft-in"` is labeled as `"foot"`, consistent with
+    how `convertLength` treats it as decimal feet for computation.
 -   `is24HourFormat(locale)` — returns `true` if the locale's resolved hour cycle is 24-hour (`h23`/`h24`).
 -   `getCurrencyByLocale(locale?)` — resolves the ISO currency code for a locale (respects a `-u-cu-xxx` Unicode
     extension first, then falls back to the locale's region, then `"USD"`).

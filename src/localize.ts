@@ -7,13 +7,14 @@ import { createLocalizeInstance } from "./storage";
 import { localeMap } from "./constants";
 import {
     convertLength,
+    convertVolume,
     convertWeight,
     formatCurrency,
     getMeasureFormat,
     getUnitLabel,
     is24HourFormat,
 } from "./utilities/utilities";
-import { MeasureFormat, LengthUnit, MassUnit } from "./utilities/types";
+import { MeasureFormat, LengthUnit, MassUnit, VolumeUnit } from "./utilities/types";
 
 export function createLocalize(provider: IntlProviderMode = "client", defaultLocale = "en-US") {
     const localeInstance = createLocalizeInstance(defaultLocale);
@@ -143,6 +144,18 @@ export function createLocalize(provider: IntlProviderMode = "client", defaultLoc
              */
             convertWeight: (value: string | number, from: MassUnit, to: MassUnit): number | null => {
                 return convertWeight(value, from, to);
+            },
+            /**
+             * Converts a volume value from one unit to another.
+             *
+             * Supports metric volumes and US customary imperial fluid volumes as defined in VolumeUnit.
+             * @param value
+             * @param from
+             * @param to
+             * @returns
+             */
+            convertVolume: (value: string | number, from: VolumeUnit, to: VolumeUnit): number | null => {
+                return convertVolume(value, from, to);
             },
         },
         /**
