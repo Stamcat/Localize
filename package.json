@@ -104,6 +104,11 @@
     "fast-uri": "3.1.9",
     "follow-redirects": "1.16.3",
     "glob": "14.0.6",
-    "minimatch": "11.0.9"
+    "test-exclude": {
+      "minimatch": "11.0.9"
+    },
+    "fork-ts-checker-webpack-plugin": {
+      "minimatch": "11.0.9"
+    }
   }
 }
