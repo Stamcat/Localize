@@ -51,18 +51,18 @@
     "@commitlint/config-conventional": "17.6.6",
     "@commitlint/prompt": "21.2.0",
     "@commitlint/prompt-cli": "21.2.0",
-    "@storybook/addon-docs": "10.6.1",
-    "@storybook/addon-links": "10.6.1",
-    "@storybook/addon-onboarding": "10.6.1",
+    "@storybook/addon-docs": "10.6.7",
+    "@storybook/addon-links": "10.6.7",
+    "@storybook/addon-onboarding": "10.6.7",
     "@storybook/addon-webpack5-compiler-swc": "1.0.2",
-    "@storybook/react": "10.6.1",
-    "@storybook/react-webpack5": "10.6.1",
+    "@storybook/react": "10.6.7",
+    "@storybook/react-webpack5": "10.6.7",
     "@testing-library/jest-dom": "5.17.0",
     "@testing-library/user-event": "13.5.0",
     "@types/fs-extra": "11.0.4",
     "@types/jest": "27.5.2",
     "@types/node": "16.18.67",
-    "@typescript-eslint/eslint-plugin": "8.61.0",
+    "@typescript-eslint/eslint-plugin": "8.73.0",
     "axios-mock-adapter": "1.22.0",
     "brace-expansion": "5.0.12",
     "commit-and-tag-version": "11.2.2",
@@ -80,16 +80,16 @@
     "jest-sonar-reporter": "2.0.0",
     "js-yaml": "4.3.2",
     "lint-staged": "17.6.0",
-    "npm-package-json-lint": "11.0.0",
+    "npm-package-json-lint": "11.0.1",
     "npm-package-json-lint-config-default": "10.0.0",
     "prettier": "3.2.5",
     "semver": "7.6.0",
-    "storybook": "10.6.1",
+    "storybook": "10.6.7",
     "ts-jest": "29.4.11",
     "ts-node": "10.9.1",
     "tsx": "4.22.4",
     "typescript": "6.0.3",
-    "zod": "4.3.6"
+    "zod": "4.6.7"
   },
   "lint-staged": {
     "package-lock.json": "node qualityChecks/check-package-lock.cjs",
@@ -100,6 +100,10 @@
   },
   "overrides": {
     "brace-expansion": "5.0.12",
-    "js-yaml": "4.3.2"
+    "js-yaml": "4.3.2",
+    "fast-uri": "3.1.9",
+    "follow-redirects": "1.16.3",
+    "glob": "14.0.6",
+    "minimatch": "11.0.9"
   }
 }
