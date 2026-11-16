@@ -6,3 +6,4 @@ App_Data
 *storybook.log
 .DS_Store
 storybook-static/
+.codebase-memory/
